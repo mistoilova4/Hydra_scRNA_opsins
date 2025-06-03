@@ -4,10 +4,12 @@
 * [Getting Started](#Getting)
     * [Loading Packages and Data](#Loading) 
 * [Plotting Opsin Expression](#Plotting)
-    * [**Figure 1** : Plotting expression across cell types in *Hydra*](#Fig1)
-    * [**Figure 2**: Plotting expression across cell states in *Hydra*](#Fig2)
-    * [**Figure 3**: Plotting expression body sections in *Hydra*](#Fig3)
-    * [misc. gene expression tests](#misc)
+    * [**Figure 2** : Plotting expression across cell types in *Hydra*](#Fig2)
+      * [**Figure 2** 0.1% expression cutoff example](#0.1)
+      * [**Figure 2** 10% expression cutoff example](#10)
+    * [**Figure 3**: Plotting expression across cell states in *Hydra*](#Fig3)
+    * [**Figure 4**: Plotting expression body sections in *Hydra*](#Fig3)
+    * [misc. gene expression tests in discussion](#misc)
         * [Phototransduction cascade](#phot)
         * [Wnt](#wnt)
 * [Pulling Average Expression Values](#avg)
@@ -338,7 +340,7 @@ grep("t16278aep", rownames(interstitial@logupx.data), value=T)
 't16278aep|OPSC2_HEMSA'
 
 
-### **Figure 1** : Plotting expression across cell types in *Hydra* <a class="anchor" id="Fig1"></a>
+### **Figure 2** : Plotting expression across cell types in *Hydra* <a class="anchor" id="Fig2"></a>
 
 
 ```R
@@ -433,7 +435,7 @@ levels(hydraV3) <- new_order
     
 
 
-#### **Figure 1 Plot**
+#### **Figure 2 Plot**
 
 
 ```R
@@ -446,7 +448,7 @@ DotPlot(
         #scale.min =  ,
         cluster.idents = FALSE,
         scale = FALSE, # Make TRUE if you want log normalized, read corrected counts to be scaled as Z scores
-        #scale.by = "size",
+        scale.by = "size",
 )+ RotatedAxis()
 options(repr.plot.width=15, repr.plot.height=10)
 ```
@@ -468,7 +470,7 @@ options(repr.plot.width=15, repr.plot.height=10)
 ```R
 #If you want PDF output un comment the next and last line
 
-output_file <- file.path(output_dir, "Figure_3_dotplot_5.tif")
+output_file <- file.path(output_dir, "Figure_3_dotplot_5p.tif")
 tiff(output_file, width = 15, height = 10, units = "in", res = 300)
 DotPlot(
         object = hydraV3, 
@@ -498,13 +500,13 @@ dev.off()
 <strong>pdf:</strong> 2
 
 
-##### 0.1% expression cutoff example
+##### **Figure 2:** 0.1% expression cutoff example <a class="anchor" id="0.1"></a> 
 
 
 ```R
 #making opsin dotplot
 #If you want PDF output un comment the next and last line
-#pdf("./output/Figure_3_dotplot_0.1.pdf", width = 15, height = 10)
+#pdf("./output/Figure_2_dotplot_0.1p.pdf", width = 15, height = 10)
 DotPlot(
         object = hydraV3, 
         features = new.hydraV3.features, 
@@ -533,12 +535,12 @@ options(repr.plot.width=15, repr.plot.height=10)
     
 
 
-##### 10% expression cutoff example
+##### **Figure 2:** 10% expression cutoff example <a class="anchor" id="10"></a> 
 
 
 ```R
 #If you want PDF output un comment the next and last line
-#pdf("./output/Figure_3_dotplot_10.pdf", width = 15, height = 10)
+#pdf("./output/Figure_2_dotplot_10p.pdf", width = 15, height = 10)
 DotPlot(
         object = hydraV3, 
         features = new.hydraV3.features, 
@@ -567,7 +569,7 @@ options(repr.plot.width=15, repr.plot.height=10)
     
 
 
-### **Figure 2**: Plotting expression across cell states in *Hydra* <a class="anchor" id="Fig2"></a>
+### **Figure 3**: Plotting expression across cell states in *Hydra* <a class="anchor" id="Fig2"></a>
 
 
 ```R
@@ -583,7 +585,7 @@ plotTree(interstitial,
 dev.off()
 
 # Export opsin plot on ectodermal cell lineage
-output_file <- file.path(output_dir, "Figure_2_t29959aep_ectodermal.tif")
+output_file <- file.path(output_dir, "Figure_3_t29959aep_ectodermal.tif")
 tiff(output_file, width = 10, height = 10, units = "in", res = 300)
 plotTree(ectoderm,
          "t29959aep|OPN4B_XENLA", 
@@ -594,7 +596,7 @@ plotTree(ectoderm,
 dev.off()
 
 # Export opsin plot on endodermal lineage
-output_file <- file.path(output_dir, "Figure_2_t27688aep_endodermal.tif")
+output_file <- file.path(output_dir, "Figure_3_t27688aep_endodermal.tif")
 tiff(output_file, width = 10, height = 10, units = "in", res = 300)
 plotTree(endoderm, 
          "t27688aep|OPSP_COLLI", 
@@ -617,11 +619,11 @@ dev.off()
 <strong>pdf:</strong> 2
 
 
-### **Figure 3** : Plotting expression body sections in *Hydra* <a class="anchor" id="Fig3"></a>
+### **Figure 4** : Plotting expression body sections in *Hydra* <a class="anchor" id="Fig3"></a>
 
 
 ```R
-output_file <- file.path(output_dir, "Figure_3_dotplot_5.tif")
+output_file <- file.path(output_dir, "Figure_4_dotplot_5.tif")
 tiff(output_file, width = 15, height = 10, units = "in", res = 300)
 plotSmoothFitMultiCascade(ectoderm.splines, c("t29150aep|OPSX_HUMAN", 
                                               "t20043aep|OPSX_HUMAN", 
@@ -698,7 +700,6 @@ grep("t911aep", rownames(interstitial@logupx.data), value=T)
 grep("t27546aep", rownames(interstitial@logupx.data), value=T)
 #ANK1_HUMAN
 grep("t11518aep", rownames(interstitial@logupx.data), value=T)
-
 grep("t32411aep", rownames(interstitial@logupx.data), value=T)
 grep("t36031aep", rownames(interstitial@logupx.data), value=T)
 grep("t28209aep", rownames(interstitial@logupx.data), value=T)
@@ -874,7 +875,7 @@ photo_all <- c(
   't28209aep', 
   't2619aep-PIP1-DROME',
   't30156aep-PLCB3-HUMAN',
-  't25553aep-TCB1-CAEBR',
+  't25553aep-TCB1-CAEBR'
 )
 
 DotPlot(
@@ -891,10 +892,15 @@ DotPlot(
 options(repr.plot.width = 15, repr.plot.height = 10)
 ```
 
+    Warning message:
+    “[1m[22mRemoved 474 rows containing missing values or values outside the scale range
+    (`geom_point()`).”
 
-    Error in c("t12724aep-GNAS-HOMAM", "t15699aep-GNAO-BOVIN", "t12031aep-GNAI-PATPE", : argument 34 is empty
-    Traceback:
 
+
+    
+![png](output_25_1.png)
+    
 
 
 #### Wnt <a class="anchor" id="Wnt"></a>
@@ -989,7 +995,6 @@ DotPlot(
 
 
 ```R
-# Run AverageExpression with your features
 avg_expr <- AverageExpression(
   hydraV3,
   assays = "RNA",
